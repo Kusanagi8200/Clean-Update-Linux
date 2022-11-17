@@ -51,11 +51,11 @@ then
 	apt upgrade
         apt  --fix-broken install
 fi
-echo # 
+echo #
 
 echo -e "\033[43;30m <--- END OF UPDATE \033[0m"
 echo #
-echo # 
+echo #
 
 echo -e "\033[43;30m ---> POST-UPDATE CLEANING \033[0m"
 echo #
