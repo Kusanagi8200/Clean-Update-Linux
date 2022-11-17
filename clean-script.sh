@@ -47,9 +47,9 @@ apt update && apt list --upgradable
 zenity --title "UPGRADE" --question --text "Voulez vous faire la Mise à jour ?"
 
 if [ $? -eq 0 ]
-then 
+then
 	apt upgrade
-        apt  --fix-broken install
+        apt --fix-broken install
 fi
 echo # 
 
