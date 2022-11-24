@@ -38,7 +38,8 @@ echo #
 echo -e "\033[43;30m ---> MISE A JOUR DES PAQUETS \033[0m"
 apt update && apt list --upgradable
 
-apt-get -y upgrade
+apt-get -y upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
+
 apt-get --fix-broken install
 
 echo # 
