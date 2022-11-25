@@ -7,4 +7,6 @@ Une version fast, qui ne demande aucune confirmation d'action et se concentre su
 
 Une version longue avec differente confirmations d'action et un affichage final d'information systeme et hardware. 
 
-Une version de chaque en Anglais. 
+Une version de chaque en Anglais.
+
+Amélioration en cours...
