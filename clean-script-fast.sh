@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# This program is free software : you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
 echo #
-echo -e "\033[43;30m SCRIPT DE NETTOYAGE ET DE MISE A JOUR SYSTEME LINUX / Copyright (C) Elijah Kaminski/2022 \033[0m"
+echo -e "\033[43;30m SCRIPT DE NETTOYAGE ET DE MISE À JOUR SYSTÈME LINUX / https://github.com/Kusanagi8200 \033[0m"
 
 #Fonction qui vérifie que le script est lancé en sudo ou root.
 
@@ -135,7 +141,7 @@ else
 fi 
 echo #
 
-zenity --title "REBOOT" --question --text "VOULEZ VOUS REDÉMARRER ?"
+zenity --title "REBOOT" --question --text "\nVoulez vous redémarrer ?"
 if [ $? -eq 0 ]
 then 
         reboot
