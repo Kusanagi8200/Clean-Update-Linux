@@ -9,19 +9,12 @@
 echo #
 echo -e "\033[43;30m LINUX SYSTEM CLEANUP AND UPDATE SCRIPT / https://github.com/Kusanagi8200 \033[0m"
 
+echo #
 if [ `whoami` != "root" ]
 then
         echo -e "\033[5;41;30m WARNING. YOU MUST HAVE SUDO RIGHTS TO RUN THIS SCRIPT \033[0m"
         exit 1
 fi
-
-zenity --title "ATTENTION" --question --text "An update can damage your system.\nMake a snapshot before starting the update.\n\n DO YOU WANT TO CONTINUE ?" \
-       --ok-label "OK" --cancel-label "QUITTER"
-if [ "$?" != "0" ] ; then
-  exit 0
-fi
-
-#Function that checks the presence of log files and creates them if necessary. 
 
 echo #
 echo -e "\033[43;30m ---> CHECK LOG FILES \033[0m"
@@ -29,7 +22,7 @@ echo -e "\033[43;30m ---> CHECK LOG FILES \033[0m"
 echo #
 if [ -e /var/log/update_upgrade.log ]
 then
-    echo -e "\033[47;32m FILES \033[0m" /var/log/update_upgrade.log = "\033[47;32m OK \033[0m"
+    echo -e "\033[47;32m FILE \033[0m" /var/log/update_upgrade.log = "\033[47;32m OK \033[0m"
 else
     echo -e "\033[47;31m FILE DOESN'T EXIST \033[0m" & touch /var/log/update_upgrade.log
     echo -e "\033[41;33m --> FILE CREATION \033[0m" /var/log/update_upgrade.log = "\033[47;32m DONE \033[0m"
@@ -38,14 +31,12 @@ fi
 echo #
 if [ -e /var/log/update_upgrade.err ]
 then
-    echo -e "\033[47;32m FILES \033[0m" /var/log/update_upgrade.err = "\033[47;32m OK \033[0m"
+    echo -e "\033[47;32m FILE \033[0m" /var/log/update_upgrade.err = "\033[47;32m OK \033[0m"
 else
     echo -e "\033[47;31m FILE DOESN'T EXIST \033[0m" & touch /var/log/update_upgrade.err
     echo -e "\033[41;33m --> FILE CREATION \033[0m" /var/log/update_upgrade.err = "\033[47;32m DONE \033[0m"
 fi
 echo #
-
-#System update cleaning sequence
 
 echo #
 echo -e "\033[43;30m ---> PRE-UPDATE CLEANING \033[0m"
@@ -74,27 +65,23 @@ echo -e "\033[43;30m <--- END OF PRE-UPDATE CLEANING \033[0m"
 echo #
 echo # 
 
-#Package update sequence
 
-echo -e "\033[43;30m ---> UPDATING PACKAGES \033[0m"
+echo -e "\033[43;30m --->  \033[0m"
 apt update && apt list --upgradable
 
-zenity --title "UPGRADE" --question --text "\n Do you want to update ?"
+apt-get -y upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
 
-if [ $? -eq 0 ]
-then
-	apt upgrade
-        apt --fix-broken install
-fi
+apt-get --fix-broken install
+
 echo # 
 
-echo -e "\033[43;30m <--- PACKAGE UPDATE COMPLETE \033[0m"
+echo -e "\033[43;30m <--- UPDATING PACKAGES \033[0m"
 echo #
 echo # 
 
-#Post-update system cleaning sequence
+#Séquence de nettoyage systeme post mise à jour 
 
-echo -e "\033[43;30m ---> POST-UPDATE CLEANUP \033[0m"
+echo -e "\033[43;30m --->  \033[0m"
 echo #
 echo -e "\033[44;37m APT CLEAN \033[0m"
 apt clean 
@@ -132,58 +119,20 @@ echo #
 
 echo -e "\033[43;30m <--- END OF POST-UPDATE CLEANUP \033[0m"
 echo #
-echo #
-
-#System Information Sequence
-
-echo -e "\033[43;30m ---> SYSTEME INFORMATIONS <--- \033[0m"
-cat /proc/version
-echo #
-
-cat /etc/os-release
-echo #
-echo #
-
-echo -e "\033[43;30m KERNEL LIST \033[0m"
-dpkg -l | grep -Ei "linux-(g|h|i|lo|si|t)" |sort -k3 | cut -d" " -s -f1,2,3 | column -s" " -t
-echo #
-echo #
-
-echo -e "\033[43;30m FREE DISK SPACE \033[0m"
-df -h 
-echo #
-echo #
-
-echo -e "\033[43;30m HARDWARE AND USER INFORMATIONS \033[0m"
-
-zenity --title "NEOFETCH" --question --text "\nInstall Neofetch for more information ?"
-
-if [ $? -eq 0 ]
-then 
-       apt install neofetch 
-fi
-echo # 
-echo #
-
-neofetch
-echo #
-
-#Function that checks the log files and displays the error log if errors are present
 
 echo # 
 echo -e "\033[43;30m ---> UPDATE ERROR LOG FILE \033[0m"
 
 if [ -N /var/log/update_upgrade.err ]
   then 
-        echo -e "\033[5;41;37m ATTENTION \033[0m" & cat /var/log/update_upgrade.err 
+	echo -e "\033[5;41;37m ATTENTION \033[0m" & cat /var/log/update_upgrade.err 
         echo #
 else
-        echo -e "\033[44;37m NO UPDATE ERROR \033[0m" 
+	echo -e "\033[44;37m NO UPDATE ERROR \033[0m" 
 fi 
 echo #
-echo #
 
-zenity --title "REBOOT" --question --text "\n Do you want to reboot ?"
+zenity --title "REBOOT" --question --text "\nDo you want to reboot ?"
 if [ $? -eq 0 ]
 then 
         reboot
