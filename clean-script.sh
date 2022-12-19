@@ -94,7 +94,7 @@ echo #
 
 #Séquence de nettoyage systeme post mise à jour
 
-echo -e "\033[43;30m ---> NETTOYAGE POST MAJ \033[0m"
+echo -e "\033[43;30m ---> NETTOYAGE POST-MAJ \033[0m"
 echo #
 echo -e "\033[44;37m APT CLEAN \033[0m"
 apt clean 

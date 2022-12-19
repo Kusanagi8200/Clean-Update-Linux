@@ -45,7 +45,7 @@ echo #
 #Séquence de nettoyage systeme update
 
 echo #
-echo -e "\033[43;30m ---> NETTOYAGE PRE MAJ \033[0m"
+echo -e "\033[43;30m ---> NETTOYAGE PRE-MAJ \033[0m"
 echo #
 echo -e "\033[44;37m APT CLEAN \033[0m"
 apt clean 
@@ -66,14 +66,14 @@ echo #
 echo -e "\033[44;37m APT CHECK \033[0m"
 apt check
 echo #
-echo -e "\033[43;30m <--- FIN DU NETTOYAGE PRE MAJ \033[0m"
+echo -e "\033[43;30m <--- FIN DU NETTOYAGE PRE-MAJ \033[0m"
 
 echo #
 echo # 
 
 #Séquence de mise à jours des paquets
 
-echo -e "\033[43;30m ---> MISE A JOUR DES PAQUETS \033[0m"
+echo -e "\033[43;30m ---> MISE À JOUR DES PAQUETS \033[0m"
 apt update && apt list --upgradable
 
 apt-get -y upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
@@ -88,7 +88,7 @@ echo #
 
 #Séquence de nettoyage systeme post mise à jour 
 
-echo -e "\033[43;30m ---> NETTOYAGE POST MAJ \033[0m"
+echo -e "\033[43;30m ---> NETTOYAGE POST-MAJ \033[0m"
 echo #
 echo -e "\033[44;37m APT CLEAN \033[0m"
 apt clean 
@@ -124,7 +124,7 @@ echo -e "\033[43;30m ---> NETTOYAGE DES CONFIG DE PAQUETS \033[0m"
 [[ $(dpkg -l | grep ^rc) ]] && sudo dpkg -P $(dpkg -l | awk '/^rc/{print $2}') || echo -e "\033[44;37m PAS DE PAQUETS À PURGER \033[0m"
 echo #
 
-echo -e "\033[43;30m <--- FIN DU NETTOYAGE POST MAJ \033[0m"
+echo -e "\033[43;30m <--- FIN DU NETTOYAGE POST-MAJ \033[0m"
 echo #
 
 #Fonction qui verifie les fichiers de log et affiche le log erreur si des erreurs sont presentes.
