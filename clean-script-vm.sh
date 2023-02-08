@@ -105,9 +105,6 @@ echo #
 echo -e "\033[44;37m APT PURGE \033[0m"
 apt purge
 echo #
-echo -e "\033[44;37m APT CHECK \033[0m"
-apt check
-echo #
 
 echo -e "\033[43;30m ---> NETTOYAGE DU CACHE \033[0m"
 sync; echo 3 > /proc/sys/vm/drop_caches
