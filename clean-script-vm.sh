@@ -63,8 +63,7 @@ echo #
 echo -e "\033[44;37m APT PURGE \033[0m"
 apt purge
 echo #
-echo -e "\033[44;37m APT CHECK \033[0m"
-apt check
+
 echo #
 echo -e "\033[43;30m <--- FIN DU NETTOYAGE PRE-MAJ \033[0m"
 
