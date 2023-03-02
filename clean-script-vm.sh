@@ -138,6 +138,5 @@ else
 	echo -e "\033[44;37m PAS D'ERREUR DE MAJ \033[0m" 
 fi 
 echo #
-
-echo -e "\033[43;30m ---> THE END <--- \033[0m"
+echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
 echo #
