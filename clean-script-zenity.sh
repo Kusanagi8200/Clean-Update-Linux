@@ -189,5 +189,5 @@ then
         reboot
 fi
 
-echo -e "\033[44;30m ---> THE END <--- \033[0m"
+echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
 echo #
