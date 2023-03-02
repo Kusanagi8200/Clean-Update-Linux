@@ -149,5 +149,5 @@ then
         reboot
 fi
 
-echo -e "\033[43;30m ---> END OF THE SCRIPT <--- \033[0m"
+echo -e "\033[44;30m ---> END OF THE SCRIPT <--- \033[0m"
 echo #
