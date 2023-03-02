@@ -143,11 +143,25 @@ else
 fi 
 echo #
 
-zenity --title "REBOOT" --question --text "\nVoulez vous redémarrer ?"
-if [ $? -eq 0 ]
-then 
-        reboot
-fi
+confirm()
+{
+    read -r -p "${1} [y/N] " response
 
-echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+if confirm "REBOOT ?"; then
+   reboot
+else
+    echo #
+    echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
+    
+fi
 echo #
