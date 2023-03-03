@@ -143,6 +143,7 @@ else
 fi 
 echo #
 
+# Reboot ? Function
 confirm()
 {
     read -r -p "${1} [y/N] " response
