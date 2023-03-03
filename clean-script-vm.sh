@@ -77,9 +77,9 @@ apt update
 
 apt list --upgradable
 
-apt-get upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
+apt upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
 
-apt-get --fix-broken install
+apt --fix-broken install
 
 echo # 
 

@@ -15,11 +15,32 @@ then
         exit 1
 fi
 
-zenity --title "ATTENTION" --question --text "Une MAJ peut endommager votre système.\nFaire un snapshot avant de lancer la MAJ.\n\n     VOULEZ VOUS CONTINUER ?" \
-       --ok-label "OK" --cancel-label "QUITTER"
-if [ "$?" != "0" ] ; then
-  exit 0
+#WARNING UPDATE
+echo -e "\033[5;41;37m ATTENTION. UNE MISE A JOUR PEUT ENDOMMAGER VOTRE SYSTEME \033[0m"
+confirm()
+{
+    read -r -p "${1} [y/N] " response
+
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+if confirm "VOULEZ VOUS CONTINUER ?"; then
+   echo #
+   echo -e "\033[44;37m ---> POURSUITE DE LA MISE A A JOUR <--- \033[0m"
+else
+    echo #
+    echo -e "\033[44;37m ---> FIN DE LA MISE A JOUR <--- \033[0m"
+    exit
 fi
+
+echo #
 
 #Fonction qui vérifie la presence des fichiers de log et les crée au besoin. 
 
@@ -79,16 +100,30 @@ echo #
 echo -e "\033[43;30m ---> MISE A JOUR DES PAQUETS \033[0m"
 apt update && apt list --upgradable
 
-zenity --title "UPGRADE" --question --text "\n Voulez vous faire la MAJ ?"
+confirm()
+{
+    read -r -p "${1} [y/N] " response
 
-if [ $? -eq 0 ]
-then
-	apt upgrade
-        apt --fix-broken install
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+if confirm "UPGRADE ?"; then
+   apt upgrade && apt --fix-broken install
+else
+    echo #
+    echo -e "\033[44;30m ---> PAS D'UPGRADE <--- \033[0m"
+    echo #
+    echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
+    exit
 fi
-echo # 
 
-echo -e "\033[43;30m <--- MISE À JOUR DES PAQUETS TERMINÉE \033[0m"
 echo #
 echo # 
 
@@ -175,7 +210,7 @@ if confirm "INSTALLER NEOFETCH ?"; then
    apt install neofetch && neofetch
 else
     echo #
-    echo -e "\033[44;30m ---> NEOFETCH NE SERA PAS INSTALLÉ <--- \033[0m"
+    echo -e "\033[44;37m ---> NEOFETCH NE SERA PAS INSTALLÉ <--- \033[0m"
     
 fi
 echo #
@@ -214,7 +249,7 @@ if confirm "REBOOT ?"; then
    reboot
 else
     echo #
-    echo -e "\033[44;30m ---> FIN DU SCRIPT <--- \033[0m"
+    echo -e "\033[44;37m ---> FIN DU SCRIPT <--- \033[0m"
     
 fi
 echo #
