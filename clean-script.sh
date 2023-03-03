@@ -156,16 +156,28 @@ echo #
 
 echo -e "\033[43;30m INFORMATIONS HARDWARE ET USER \033[0m"
 
-zenity --title "NEOFETCH" --question --text "\nInstaller Neofetch pour plus d'informations ?"
+#INSTALLATION DE NEOFETCH CHECK INFOS SYSTEM
+confirm()
+{
+    read -r -p "${1} [y/N] " response
 
-if [ $? -eq 0 ]
-then 
-       apt install neofetch 
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+if confirm "INSTALLER NEOFETCH ?"; then
+   apt install neofetch && neofetch
+else
+    echo #
+    echo -e "\033[44;30m ---> NEOFETCH NE SERA PAS INSTALLÉ <--- \033[0m"
+    
 fi
-echo # 
-echo #
-
-neofetch
 echo #
 
 #Fonction qui verifie les fichiers de log et affiche le log erreur si des erreurs sont presentes.

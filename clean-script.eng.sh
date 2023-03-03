@@ -144,18 +144,28 @@ df -h
 echo #
 echo #
 
-echo -e "\033[43;30m HARDWARE AND USER INFORMATION \033[0m"
+#NEOFETCH INSTALLATION FOR CHECK INFOS SYSTEM
+confirm()
+{
+    read -r -p "${1} [y/N] " response
 
-zenity --title "NEOFETCH" --question --text "\nInstall Neofetch for more information ?"
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
 
-if [ $? -eq 0 ]
-then 
-       apt install neofetch 
+if confirm "INSTALL NEOFETCH ?"; then
+   apt install neofetch && neofetch
+else
+    echo #
+    echo -e "\033[44;30m ---> NO INSTALLATION OF NEOFETCH  <--- \033[0m"
+    
 fi
-echo # 
-echo #
-
-neofetch
 echo #
 
 echo # 

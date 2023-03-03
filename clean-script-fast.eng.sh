@@ -67,11 +67,11 @@ echo #
 
 
 echo -e "\033[43;30m ---> UPDATING PACKAGES \033[0m"
-apt update &&
+apt update 
 
 apt list --upgradable &&
 
-apt-get -y upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err &&
+apt-get -y upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err 
 
 apt-get --fix-broken install
 
