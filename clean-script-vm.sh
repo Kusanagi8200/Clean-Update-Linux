@@ -70,25 +70,30 @@ echo -e "\033[43;30m <--- FIN DU NETTOYAGE PRE-MAJ \033[0m"
 echo #
 echo # 
 
-#Séquence de mise à jours des paquets
 
+# Séquence de mise à jour des paquets
+
+# Afficher un message de début de mise à jour
 echo -e "\033[43;30m ---> MISE À JOUR DES PAQUETS \033[0m"
-apt update 
 
-apt list --upgradable
+# Mettre à jour la liste des paquets disponibles
+apt-get update 
 
-apt upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
+# Afficher la liste des paquets qui peuvent être mis à jour
+apt-get list --upgradable
 
-apt --fix-broken install
+# Mettre à jour les paquets
+apt-get upgrade | tee -a /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
 
-echo # 
+# Réparer les paquets cassés
+apt-get --fix-broken install
 
+# Afficher un message de fin de mise à jour
 echo -e "\033[43;30m <--- MISE À JOUR DES PAQUETS TERMINÉE \033[0m"
 echo #
-echo # 
 
 #Séquence de nettoyage systeme post mise à jour 
-
+echo #
 echo -e "\033[43;30m ---> NETTOYAGE POST-MAJ \033[0m"
 echo #
 echo -e "\033[44;37m APT CLEAN \033[0m"
