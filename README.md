@@ -17,4 +17,8 @@ PHASE 2 -->
 Ajout de la création de fichier log de mise à jour et d'erreur de mise à jour. 
 
 Suppression des popup zenity
+
+PHASE 3 --> 
+
+Corrections des commandes
   
