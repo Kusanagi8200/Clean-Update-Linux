@@ -74,13 +74,13 @@ echo #
 #Séquence de mise à jours des paquets
 
 echo -e "\033[43;30m ---> MISE À JOUR DES PAQUETS \033[0m"
-apt update 
+apt-get update 
 
 apt list --upgradable
 
-apt upgrade  >> /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err 
-
-apt --fix-broken install
+apt-get upgrade -y | tee -a /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
+   
+apt-get --fix-broken install
 
 echo # 
 

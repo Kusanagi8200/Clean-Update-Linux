@@ -80,10 +80,10 @@ echo -e "\033[43;30m ---> MISE À JOUR DES PAQUETS \033[0m"
 apt-get update 
 
 # Afficher la liste des paquets qui peuvent être mis à jour
-apt-get list --upgradable
+apt list --upgradable
 
-# Mettre à jour les paquets
-apt-get upgrade | tee -a /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
+# Mettre à jour les paquet
+apt-get upgrade -y | tee -a /var/log/update_upgrade.log 2>> /var/log/update_upgrade.err
 
 # Réparer les paquets cassés
 apt-get --fix-broken install
